@@ -199,4 +199,8 @@ class AppInit():
     def exit(self):
         exit()
         
-    
+    def checkUpdates(self):
+        print("Checking for updates")
+        import http
+        import json
+        http.HTTPMethods().get("https://api.github.com/repos/Snufie/SnyvieCLA/releases/latest")
