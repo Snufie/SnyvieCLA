@@ -198,9 +198,35 @@ class AppInit():
     
     def exit(self):
         exit()
-        
-    def checkUpdates(self):
+
+   
+def checkUpdates():
         print("Checking for updates")
-        import http
-        import json
-        http.HTTPMethods().get("https://api.github.com/repos/Snufie/SnyvieCLA/releases/latest")
+        import requests
+        response = requests.get("https://api.github.com/repos/Snufie/SnyvieCLA/releases/latest")
+        latest_release = response
+        print(latest_release.json())
+
+
+def setUpdate():
+    import json
+    import requests
+
+    url = "https://api.github.com/repos/Snufie/SnyvieCLA/releases"
+    headers = {
+        "Authorization": "token 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",
+        "Accept": "application/vnd.github.v3+json",
+    }
+    data = {
+        "tag_name": "v1.0.1",
+        "target_commitish": "main",
+        "name": "v1.0.0",
+        "body": "Description of the release",
+        "draft": False,
+        "prerelease": False,
+    }
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    print(response.json())
+
+checkUpdates()
