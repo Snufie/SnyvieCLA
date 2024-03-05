@@ -201,9 +201,6 @@ class AppInit():
     
     def exit(self):
         exit()
-
-    def Version(self):
-        print(f"Current version: {CURRENT_VERSION}")
     
     def checkUpdates(self):
         print(f"{bcolors.BOLD}Checking for updates{bcolors.ENDC}")
@@ -222,4 +219,6 @@ class AppInit():
             elif choice in ["no", "n", ""]:
                 print("Aborted")
 
-        
+class version:
+    def version(self):
+        print(f"Current version: {CURRENT_VERSION}")        
