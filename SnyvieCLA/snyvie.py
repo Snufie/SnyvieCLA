@@ -202,6 +202,9 @@ class AppInit():
     def exit(self):
         exit()
 
+    def Version(self):
+        print(f"Current version: {CURRENT_VERSION}")
+    
     def checkUpdates(self):
         print(f"{bcolors.BOLD}Checking for updates{bcolors.ENDC}")
         print(f"{bcolors.OKCYAN}Current version: {CURRENT_VERSION}{bcolors.ENDC}")
