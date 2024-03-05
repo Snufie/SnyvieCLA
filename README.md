@@ -3,6 +3,8 @@
 text goes here...
 
 <hr>
+<details>
+<section>Click to see changelogs</section>
 
 # v1.0.32
 
@@ -31,4 +33,5 @@ Added an automatic way to create a changelog and add it to the README.md file wh
 ## Known Issues
 - Version variable doesn't update with each update
 - Admin input does not get validated correctly
-        
+
+</details>        
