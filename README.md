@@ -104,9 +104,36 @@ Fixed the README file having to be committed separately and the old script conti
 ## Known Issues
 - Snyvie's PyCLI doesn't work and may give errors when used
 - Updates install in a nested folder
+        
+<hr>
+
+# v1.0.5
+
+## TL;DR
+Fixed the updates installing in a nested folder, now everything works as expected. I still need to manually change the CURRENT_VERSION variable but that'll be fixed soon aswell.
+
+## New Features
+- Fixed updater.py
+- Emptied RELEASE-NOTES.md; no more random changelogs!
+
+## Known Issues
+- Snyvie's PyCLI doesn't work and gives an error when used
         </details>        
 
         
+# v1.0.33
+
+## TL;DR
+Added an automatic way to create a changelog and add it to the README.md file when setting an update as an admin.
+
+## New Features
+- Automatic changelogs
+- Fully functional release creator for admins
+
+## Known Issues
+- Version variable doesn't update with each update
+- Admin input does not get validated correctly
+
 # v1.0.33
 
 ## TL;DR
