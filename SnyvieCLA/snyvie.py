@@ -189,22 +189,33 @@ def check_functions():
 class AppInit():
     def __init__(self) -> None:
         self.start()
-        checkUpdates()
         return
 
     def start(self):
         date = datetime.today().date()
         tomorrow = date + timedelta(days=1)
         print(f"date: {date}\ntomorrow: {tomorrow}")
+        Agenda().passed()
+        self.checkUpdates()
     
     def exit(self):
         exit()
 
-   
-def checkUpdates():
-        print("Checking for updates")
+    def checkUpdates(self):
+        print(f"{bcolors.BOLD}Checking for updates{bcolors.ENDC}")
+        print(f"{bcolors.OKCYAN}Current version: {CURRENT_VERSION}{bcolors.ENDC}")
         response = requests.get("https://api.github.com/repos/Snufie/SnyvieCLA/releases/latest", headers={"Accept": "application/vnd.github.v3+json"})
         latest_release = response.json()['tag_name'], response.json()['published_at'], response.json()['body']
         print(latest_release)
+        if latest_release[0] != CURRENT_VERSION:
+            print(f"{bcolors.WARNING}New version available: {latest_release[0]}{bcolors.ENDC}")
+            print(f"{bcolors.OKBLUE}Published at: {latest_release[1]}{bcolors.ENDC}")
+            print(f"{bcolors.OKGREEN}Release notes: {latest_release[2]}{bcolors.ENDC}")
+            choice = input("Do you want to update? (y/N) ").lower()
+            if choice in ["yes", "y"]:
+                print("Updating...")
+                Updater(latest_release[0])
+            elif choice in ["no", "n", ""]:
+                print("Aborted")
 
-
+        
