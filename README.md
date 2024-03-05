@@ -88,9 +88,38 @@ Add version info to an isolated class so that it won't keep spamming you with up
 ## Known Issues
 - Update installs in nested folder
 - Old script doesn't stop running after updating
+        
+<hr>
+
+# v1.0.43
+
+## TL;DR
+Fixed the README file having to be committed separately and the old script continuing to run.
+
+## New Features
+- Add sys.exit(0) after updating
+- Added subprocesses to commit README.md
+- Added update rollout feedback in admin.py
+
+## Known Issues
+- Snyvie's PyCLI doesn't work and may give errors when used
+- Updates install in a nested folder
         </details>        
 
         
+# v1.0.33
+
+## TL;DR
+Added an automatic way to create a changelog and add it to the README.md file when setting an update as an admin.
+
+## New Features
+- Automatic changelogs
+- Fully functional release creator for admins
+
+## Known Issues
+- Version variable doesn't update with each update
+- Admin input does not get validated correctly
+
 # v1.0.33
 
 ## TL;DR
