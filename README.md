@@ -59,9 +59,35 @@ Added the functionality for checking for updates, downloading the update and ins
 - Snyvie's PyCLI does not work and may give errors
 - Code still has print statements
 - Updater may not work correctly as is prone to fail a lot. Keep a backup of your agenda items!
+        
+<hr>
+
+# v1.0.41
+
+## TL;DR
+Add version info to AppInit
+
+## New Features
+- Added version display
+
+## Known Issues
+- Unknown error occurs after updating where old script still runs
         </details>        
 
         
+# v1.0.33
+
+## TL;DR
+Added an automatic way to create a changelog and add it to the README.md file when setting an update as an admin.
+
+## New Features
+- Automatic changelogs
+- Fully functional release creator for admins
+
+## Known Issues
+- Version variable doesn't update with each update
+- Admin input does not get validated correctly
+
 # v1.0.33
 
 ## TL;DR
