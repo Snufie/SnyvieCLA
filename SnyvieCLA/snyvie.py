@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import os
 import inspect
 import requests
+import updater as Updater
 
 CURRENT_VERSION = "v1.0.3"
 
