@@ -5,7 +5,7 @@ import inspect
 import requests
 import updater as Updater
 
-CURRENT_VERSION = "v1.0.3"
+CURRENT_VERSION = "v1.0.34"
 
 class bcolors:
     HEADER = "\033[95m"
