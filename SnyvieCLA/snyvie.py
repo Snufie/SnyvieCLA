@@ -216,6 +216,8 @@ class AppInit():
             if choice in ["yes", "y"]:
                 print("Updating...")
                 Updater.Updater(latest_release[0])
+                import sys
+                sys.exit(0)
             elif choice in ["no", "n", ""]:
                 print("Aborted")
 
