@@ -118,4 +118,30 @@ Fixed the updates installing in a nested folder, now everything works as expecte
 
 ## Known Issues
 - Snyvie's PyCLI doesn't work and gives an error when used
+        
+<hr>
+
+# v1.0.51
+
+## TL;DR
+Update current version
+
+## New Features
+- Updated current version
+
+## Known Issues
+- Snyvie's PyCLI doesn't work and gives an error when used
         </details>        
+
+# v1.0.33
+
+## TL;DR
+Added an automatic way to create a changelog and add it to the README.md file when setting an update as an admin.
+
+## New Features
+- Automatic changelogs
+- Fully functional release creator for admins
+
+## Known Issues
+- Version variable doesn't update with each update
+- Admin input does not get validated correctly
