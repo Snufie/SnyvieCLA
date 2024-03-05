@@ -2,6 +2,9 @@ import json
 from datetime import datetime, timedelta
 import os
 import inspect
+import requests
+
+CURRENT_VERSION = "v1.0.3"
 
 class bcolors:
     HEADER = "\033[95m"
@@ -163,10 +166,6 @@ class PyCLI():
         except Exception as e:
             print(e)
 
-def start_check():
-    print("Checking functions")
-    functions = check_functions()
-    print("found: ",functions)
         
 def check_functions():
     functions = []
@@ -189,7 +188,9 @@ def check_functions():
 
 class AppInit():
     def __init__(self) -> None:
-        pass
+        self.start()
+        checkUpdates()
+        return
 
     def start(self):
         date = datetime.today().date()
@@ -202,31 +203,8 @@ class AppInit():
    
 def checkUpdates():
         print("Checking for updates")
-        import requests
-        response = requests.get("https://api.github.com/repos/Snufie/SnyvieCLA/releases/latest")
-        latest_release = response
-        print(latest_release.json())
+        response = requests.get("https://api.github.com/repos/Snufie/SnyvieCLA/releases/latest", headers={"Accept": "application/vnd.github.v3+json"})
+        latest_release = response.json()['tag_name'], response.json()['published_at'], response.json()['body']
+        print(latest_release)
 
 
-def setUpdate():
-    import json
-    import requests
-
-    url = "https://api.github.com/repos/Snufie/SnyvieCLA/releases"
-    headers = {
-        "Authorization": "token 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",
-        "Accept": "application/vnd.github.v3+json",
-    }
-    data = {
-        "tag_name": "v1.0.1",
-        "target_commitish": "main",
-        "name": "v1.0.0",
-        "body": "Description of the release",
-        "draft": False,
-        "prerelease": False,
-    }
-
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-    print(response.json())
-
-checkUpdates()
