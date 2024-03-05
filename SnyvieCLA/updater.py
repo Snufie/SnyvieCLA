@@ -13,7 +13,7 @@ class Updater():
         self.update()
 
     def update(self):
-        url = f"https://github.com/Snufie/SnyvieCLA/archive/refs/tags/{self.version}.zip"  # replace with your GitHub repo URL
+        url = f"https://github.com/Snufie/SnyvieCLA/archive/refs/tags/{self.Fversion}.zip"  # replace with your GitHub repo URL
         response = requests.get(url)
         with open(f'SnyvieCLA-{self.Fversion}.zip', 'wb') as file:
             file.write(response.content)

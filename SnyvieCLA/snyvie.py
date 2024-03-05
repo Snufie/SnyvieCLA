@@ -215,7 +215,7 @@ class AppInit():
             choice = input("Do you want to update? (y/N) ").lower()
             if choice in ["yes", "y"]:
                 print("Updating...")
-                Updater(latest_release[0])
+                Updater.Updater(latest_release[0])
             elif choice in ["no", "n", ""]:
                 print("Aborted")
 
