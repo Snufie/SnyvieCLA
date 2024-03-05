@@ -4,7 +4,7 @@ text goes here...
 
 <hr>
 <details>
-<section>Click to see changelogs</section>
+<summary>Click to see changelogs</summary>
 
 # v1.0.32
 
