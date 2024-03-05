@@ -72,9 +72,38 @@ Add version info to AppInit
 
 ## Known Issues
 - Unknown error occurs after updating where old script still runs
+        
+<hr>
+
+# v1.0.42
+
+## TL;DR
+Add version info to an isolated class so that it won't keep spamming you with update notifs.
+
+## New Features
+- Removed AppInit.Version
+- Added Version.version
+- Fixed README updating after creating a release
+
+## Known Issues
+- Update installs in nested folder
+- Old script doesn't stop running after updating
         </details>        
 
         
+# v1.0.33
+
+## TL;DR
+Added an automatic way to create a changelog and add it to the README.md file when setting an update as an admin.
+
+## New Features
+- Automatic changelogs
+- Fully functional release creator for admins
+
+## Known Issues
+- Version variable doesn't update with each update
+- Admin input does not get validated correctly
+
 # v1.0.33
 
 ## TL;DR
