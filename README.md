@@ -131,4 +131,25 @@ Update current version
 
 ## Known Issues
 - Snyvie's PyCLI doesn't work and gives an error when used
+        
+<hr>
+
+# v1.1.0
+
+## TL;DR
+Added repeating function and consequently fixed all code.
+
+## New Features
+- Add repeater function
+- Add due date updater
+- Fixed nearing and passed functions
+- Updated current_version variable
+
+## Known Issues
+- Repeat_after_days is still required when repeat is `False`
+- Debug prints still present
+- Obsolete prints
+- Update alert displays if version is higher than latest release
         </details>        
+
+
