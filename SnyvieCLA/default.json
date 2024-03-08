@@ -1,16 +1,25 @@
 {
     "entries": [
         {
-            "name": "Sea of Thieves Hourglass met MacDoogle",
-            "description": "Je had afgesproken om hourglass te doen met MacDoogle",
-            "date": "2024-02-27",
-            "repeat": "False"
+            "name": "test",
+            "description": "help",
+            "date": "2024-03-09",
+            "repeat": true,
+            "repeater": 1
         },
         {
-            "name": "test",
-            "description": "ball",
-            "date": "2024-03-01",
-            "repeat": "false"
+            "name": "test 2 day rep",
+            "description": "testing pls work",
+            "date": "2024-03-08",
+            "repeat": true,
+            "repeater": 2
+        },
+        {
+            "name": "test long tiem",
+            "description": "helpe me pepe",
+            "date": "2024-03-08",
+            "repeat": true,
+            "repeater": 0
         }
     ]
 }
