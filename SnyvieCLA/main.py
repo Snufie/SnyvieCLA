@@ -2,9 +2,7 @@ from datetime import datetime, timedelta
 import snyvie as Snyvie
 import inspect
 
-# date = datetime.today().date()
-# tomorrow = date + timedelta(days=1)
-# print(f"date: {date}\ntomorrow: {tomorrow}")
+
 
 def main():
     Snyvie.AppInit().initialise()

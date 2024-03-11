@@ -290,4 +290,9 @@ class AppInit():
 
 class version:
     def version(self):
-        print(f"Current version: {CURRENT_VERSION}")        
+        print(f"Current version: {CURRENT_VERSION}")
+
+    def help(self):
+        print("Available commands:")
+        print("  version: Print the current version of the application")
+        # Add descriptions for other commands here
