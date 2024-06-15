@@ -3,21 +3,21 @@
         {
             "name": "test",
             "description": "help",
-            "date": "2024-03-09",
+            "date": "2024-06-15",
             "repeat": true,
             "repeater": 1
         },
         {
             "name": "test 2 day rep",
             "description": "testing pls work",
-            "date": "2024-03-08",
+            "date": "2024-06-16",
             "repeat": true,
             "repeater": 2
         },
         {
             "name": "test long tiem",
             "description": "helpe me pepe",
-            "date": "2024-03-08",
+            "date": "2024-06-14",
             "repeat": true,
             "repeater": 0
         }

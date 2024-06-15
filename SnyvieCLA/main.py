@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-import snyvie as Snyvie
+import components.snyvie as Snyvie
 import inspect
 
 
@@ -13,6 +13,7 @@ if __name__ == "__main__":
     while True:
         action = input("What do you want to do? ").lower()
         funcs = Snyvie.check_functions()
+        # print(f"{funcs =}")
         for cmd, cls in funcs:
             if action == cmd:
                 class_obj = getattr(Snyvie, cls)  # Get the class from the snyvie module

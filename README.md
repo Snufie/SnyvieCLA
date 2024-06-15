@@ -150,6 +150,22 @@ Added repeating function and consequently fixed all code.
 - Debug prints still present
 - Obsolete prints
 - Update alert displays if version is higher than latest release
+        
+<hr>
+
+# v1.1.8
+
+## TL;DR
+File tree is organized and repeating agenda items work
+
+## New Features
+- Fixed repeater resetting date
+- New directory structure
+
+## Known Issues
+- Repeater is not aware of more than expected days passed
         </details>        
+
+
 
 

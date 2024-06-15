@@ -5,7 +5,7 @@ import inspect
 import requests
 import updater as Updater
 
-CURRENT_VERSION = "v1.1.0"
+CURRENT_VERSION = "v1.1.8"
 
 class bcolors:
     HEADER = "\033[95m"
@@ -39,9 +39,9 @@ class Agenda:
             "repeat": bool(repeat),
             "repeater": repeat_after_days,
         }
-        if not os.path.exists(f"SnyvieCLA/{saveto}.json"):
+        if not os.path.exists(f"SnyvieCLA/data/{saveto}.json"):
             try:
-                with open(f"SnyvieCLA/savefiles.json", "w+") as f:
+                with open(f"SnyvieCLA/data/savefiles.json", "w+") as f:
                     data = json.load(f)
                     data["entries"].append(saveto)
                     f.seek(0)
@@ -53,9 +53,9 @@ class Agenda:
     def save(self, saveTo):
         print(saveTo)
         try:
-            with open(f"SnyvieCLA/{saveTo}.json", "r+") as f:
+            with open(f"SnyvieCLA/data/{saveTo}.json", "r+") as f:
                 data = json.load(f)
-                print("data:", data)
+                print(f"{data =}")
                 if not data:
                     print(data)
                     data = {"entries": []}
@@ -63,14 +63,14 @@ class Agenda:
                 f.seek(0)
                 json.dump(data, f, indent=4)
         except FileNotFoundError:
-            with open(f"SnyvieCLA/{saveTo}.json", "w") as f:
+            with open(f"SnyvieCLA/data/{saveTo}.json", "w") as f:
                 data = {"entries": [self.entry]}
                 json.dump(data, f, indent=4)
         except Exception as e:
-            print(f"error: {e}")
+            print(f"{e =}")
             
     def remove(self, name: str, savedAt: str = "default"):
-        with open(f"SnyvieCLA/{savedAt}.json", "r+") as f:
+        with open(f"SnyvieCLA/data/{savedAt}.json", "r+") as f:
             data = json.load(f)
             for i in data["entries"]:
                 if i["name"] == name:
@@ -82,37 +82,40 @@ class Agenda:
     def removeAll(self, saveFile: str = "default"):
         choice = input("Are you sure you want to delete all entries? (y/N) ").lower()
         if choice in ["yes", "y"]:
-            os.remove(f"SnyvieCLA/{saveFile}.json")
+            os.remove(f"SnyvieCLA/data/{saveFile}.json")
         elif choice in ["no", "n", ""]:
             print("Aborted")
             
     def formatDate(self, days: int):
+        day_ext = month_ext = year_ext = ""
+        years = months = 0
         if days >= 30:
             months = days // 30
-            remainder = int((months*30)-days)
-            if months == 1:
-                ext = ""
-            else:
-                ext = "s"
-            if remainder == 1:
-                ext2 = ""
-            elif remainder == 0:
-                return f"{months} month{ext}"
-            else:
-                ext2 = "s"
-            return f"{months} month{ext} and {remainder} day{ext2}"
-        else:
-            return
+            days = days % 30
+        if months >= 12:
+            years = months // 12
+            months = months % 12
+        time_parts = []
+        if years > 0:
+            year_ext = "year" if years == 1 else "years"
+            time_parts.append(f"{years} {year_ext}")
+        if months > 0:
+            month_ext = "month" if months == 1 else "months"
+            time_parts.append(f"{months} {month_ext}")
+        if days > 0:
+            day_ext = "day" if days == 1 else "days"
+            time_parts.append(f"{days} {day_ext}")
+        return ", ".join(time_parts)
 
     def nearing(self, span: int = 1):
         savefiles = []
         self.silent_passed()
-        with open(f"SnyvieCLA/savefiles.json", "r+") as f:
+        with open(f"SnyvieCLA/data/savefiles.json", "r+") as f:
             data = json.load(f)
             for i in data["entries"]:
                 savefiles.append(i)
             for i in savefiles:
-                with open(f"SnyvieCLA/{i}", "r+") as f:
+                with open(f"SnyvieCLA/data/{i}", "r+") as f:
                     data = json.load(f)
                     for i in (data["entries"]):
                         entry_date = datetime.strptime(i["date"], "%Y-%m-%d").date()
@@ -134,12 +137,12 @@ class Agenda:
     def silent_passed(self):
         savefiles = []
         try:
-            with open(f"SnyvieCLA/savefiles.json", "r+") as f:
+            with open(f"SnyvieCLA/data/savefiles.json", "r+") as f:
                 data = json.load(f)
                 for i in data["entries"]:
                     savefiles.append(i)
         except FileNotFoundError:
-            with open(f"SnyvieCLA/savefiles.json", "w") as f:
+            with open(f"SnyvieCLA/data/savefiles.json", "w") as f:
                 json.dump({"entries": []}, f)
             self.passed()  # call passed method here
             return
@@ -149,7 +152,7 @@ class Agenda:
 
         for i in savefiles:
             try:
-                with open(f"SnyvieCLA/{i}", "r+") as f:
+                with open(f"SnyvieCLA/data/{i}", "r+") as f:
                     data = json.load(f)
                     for i in (data["entries"]):
                         entry_date = datetime.strptime(i["date"], "%Y-%m-%d").date()
@@ -157,7 +160,7 @@ class Agenda:
                         if days_passed > 0:
                             self.repeater(i["repeater"], days_passed, i['name'])
             except FileNotFoundError:
-                with open(f"SnyvieCLA/{i}", "w") as f:
+                with open(f"SnyvieClA/data/{i}", "w") as f:
                     json.dump({"entries": []}, f)
                 self.passed()  # call passed method here
                 return
@@ -168,13 +171,13 @@ class Agenda:
     def passed(self):
         savefiles = []
         try:
-            with open(f"SnyvieCLA/savefiles.json", "r+") as f:
+            with open(f"SnyvieCLA/data/savefiles.json", "r+") as f:
                 data = json.load(f)
                 for i in data["entries"]:
                     savefiles.append(i)
         except FileNotFoundError:
-            print(f"{bcolors.FAIL}Error: savefiles.json not found. Creating a new file...{bcolors.ENDC}")
-            with open(f"SnyvieCLA/savefiles.json", "w") as f:
+            print(f"{bcolors.FAIL}Error: data/savefiles.json not found. Creating a new file...{bcolors.ENDC}")
+            with open(f"SnyvieCLA/data/savefiles.json", "w") as f:
                 json.dump({"entries": []}, f)
             return
         except Exception as e:
@@ -183,7 +186,7 @@ class Agenda:
 
         for i in savefiles:
             try:
-                with open(f"SnyvieCLA/{i}", "r+") as f:
+                with open(f"SnyvieClA/data/{i}", "r+") as f:
                     data = json.load(f)
                     for i in (data["entries"]):
                         entry_date = datetime.strptime(i["date"], "%Y-%m-%d").date()
@@ -195,17 +198,18 @@ class Agenda:
                                 rep = self.repeater(i["repeater"],days_passed,i['name'])  # call repeater here
                                 if rep == None:
                                     break # if the repeater function returns None, break the loop, if it malfunctioned it would return 404
-                                # passed = f"{days_passed} days"
+                                
                             print(f"{bcolors.HEADER}{i["name"]}{bcolors.ENDC}")
                             print(i["description"])
                             print(i["date"])
                             print(i["repeat"])
                             print(i["repeater"])
                             print(f"{bcolors.FAIL}{passed} ago{bcolors.ENDC}")
+                            return
                     print(f"{bcolors.OKGREEN}No entries passed{bcolors.ENDC}")
             except FileNotFoundError:
                 print(f"{bcolors.FAIL}Error: {i} not found. Creating a new file...{bcolors.ENDC}")
-                with open(f"SnyvieCLA/{i}", "w") as f:
+                with open(f"SnyvieCLA/data/{i}", "w") as f:
                     json.dump({"entries": []}, f)
             except Exception as e:
                 print(f"{bcolors.FAIL}Error: {e}{bcolors.ENDC}")
@@ -214,13 +218,14 @@ class Agenda:
     def repeater(self, repeater: int, passed: int, name: str):
         if passed >= 0:
             try:
-                with open(f"SnyvieCLA/default.json", "r+") as f:
+                with open(f"SnyvieCLA/data/default.json", "r+") as f:
                     data = json.load(f)
                     for i in data["entries"]:
                         print(i["repeat"])
                         if i["name"] == name and bool(i["repeat"])==True:
                             print("passed the check")
-                            i["date"] = (datetime.now().date() + timedelta(days=repeater)).strftime("%Y-%m-%d")
+                            original_date = datetime.strptime(i["date"], "%Y-%m-%d").date()
+                            i["date"] = (original_date + timedelta(days=repeater)).strftime("%Y-%m-%d")
                     f.seek(0)
                     json.dump(data, f, indent=4)
                     f.truncate()
